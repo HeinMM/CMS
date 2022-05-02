@@ -16,7 +16,7 @@
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
-            <li><a href="../../../redo_php/CMS/index.php">HOME SITE</a></li>
+            <li><a href="../index.php">HOME SITE</a></li>
 
 
             <li class="dropdown">
@@ -52,12 +52,12 @@
                         </li>
                     </ul>
                 </li>
-                <li class="active">
+                <li class="">
                     <a href="./categories.php"><i class="fa fa-fw fa-wrench"></i> Categories</a>
                 </li>
 
                 <li class="">
-                    <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Comments</a>
+                    <a href="./comments.php"><i class="fa fa-fw fa-file"></i> Comments</a>
                 </li>
                 <li>
                     <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> Users</a>

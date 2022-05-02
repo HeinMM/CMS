@@ -10,6 +10,8 @@
             <th>Tags</th>
             <th>Comments</th>
             <th>Date</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>
@@ -55,6 +57,9 @@
             echo "<td class='text-center'>$post_status</td>";
             echo "<td><img width='100' src='../images/$post_image' alt='img'></td>";
             echo "<td class='text-center'>$post_tags</td>";
+
+
+
             echo "<td class='text-center'>$post_comment_count</td>";
             echo "<td class='text-center'>$post_date</td>";
 

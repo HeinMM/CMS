@@ -27,7 +27,7 @@
                 ?>
 
                 <li>
-                        <a href='../../../redo_php/CMS/admin/index.php'>Admin</a>
+                        <a href='../../../redo_php/pure_php_cms/CMS/admin/index.php'>Admin</a>
                     </li>
                     <!-- <li>
                         <a href="#">Services</a>
