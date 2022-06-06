@@ -1,13 +1,20 @@
 <?php
 
-function comfirm($result){
+function escape($string){
+    global $connection;
+  return  mysqli_real_escape_string($connection,trim($string));
+}
+
+function comfirm($result)
+{
     global $connection;
     if (!$result) {
         die('QUERY FAILED' . mysqli_error($connection));
     }
 }
 
-function insert_catergories(){
+function insert_catergories()
+{
     global $connection;
     if (isset($_POST['submit'])) {
         $cat_title = $_POST['cat_title'];
@@ -28,7 +35,8 @@ function insert_catergories(){
     }
 }
 
-function findAllCategories(){
+function findAllCategories()
+{
     global $connection;
     $query = "SELECT * FROM categories ";
     $select_categories = mysqli_query($connection, $query);
@@ -50,10 +58,10 @@ function findAllCategories(){
 </td>
 </tr>";
     }
-   
 }
 
-function deleteCategory(){
+function deleteCategory()
+{
     global $connection;
     if (isset($_GET['delete'])) {
         $del_cat_id = $_GET['delete'];
@@ -63,5 +71,37 @@ function deleteCategory(){
     }
 }
 
+function users_online()
+{
+    if (isset($_GET['onlineusers'])) {
+            
+        global $connection;
 
-?>
+        if (!$connection) {
+            session_start();
+
+            include("../includes/db.php");
+
+            $session = session_id();
+            $time = time();
+            $time_out_in_seconds = 05;
+            $time_out = $time - $time_out_in_seconds;
+
+            $query = "SELECT * FROM users_online WHERE session = '$session'";
+            $send_query = mysqli_query($connection, $query);
+            $count = mysqli_num_rows($send_query);
+
+            if ($count == NULL) {
+                mysqli_query($connection, "INSERT INTO users_online(session,time) VALUES('$session','$time')");
+            } else {
+                mysqli_query($connection, "UPDATE users_online SET time = '$time' WHERE session = '$session'");
+            }
+            $user_online_query = mysqli_query($connection, "SELECT * FROM users_online WHERE time > '$time_out' ");
+            echo $count_user = mysqli_num_rows($user_online_query);
+        }
+    }else{
+        echo 'onlineusers not set';
+    }
+}
+
+users_online();

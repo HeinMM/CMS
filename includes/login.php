@@ -18,14 +18,15 @@ if (isset($_POST['login'])) {
         $db_user_id = $row['user_id'];
         $db_username = $row['username'];
         $db_user_password = $row['user_password'];
-        $db_user_firstname = $row['user_firstname'];
-        $db_user_lastname = $row['user_lastname'];
         $db_user_role = $row['user_role'];
     }
-    if ($username === $db_username && $user_password === $db_user_password) {
+
+    // $user_password = crypt($user_password,$db_user_password);
+
+    if (password_verify($user_password,$db_user_password)) {
+        if (session_status() === PHP_SESSION_NONE) session_start();
         $_SESSION['username'] = $db_username;
-        $_SESSION['firstname'] = $db_user_firstname;
-        $_SESSION['lastname'] = $db_user_lastname;
+       
         $_SESSION['user_role'] = $db_user_role;
         header("Location: ../admin");
     } else {

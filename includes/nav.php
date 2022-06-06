@@ -1,4 +1,5 @@
 
+
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -16,6 +17,8 @@
             <ul class="nav navbar-nav">
 
                 <?php
+                //  if (session_status() == PHP_SESSION_NONE) session_start(); 
+
                 $query = "SELECT * FROM categories";
                 $select_all_categories_query = mysqli_query($connection, $query);
                 while ($row = mysqli_fetch_assoc($select_all_categories_query)) {
@@ -27,9 +30,23 @@
                 ?>
 
                 <li>
-                        <a href='../../../redo_php/pure_php_cms/CMS/admin/index.php'>Admin</a>
-                    </li>
-                    <!-- <li>
+                    <a href='./admin/index.php'>Admin</a>
+                </li>
+                <li>
+                    <a href='registration.php'>Registration</a>
+                </li>
+
+                <?php
+                if (session_start() === PHP_SESSION_NONE) session_start();
+                if (isset($_SESSION['user_role'])) {
+                    if (isset($_GET['p_id'])) {
+                        $p_id =  $_GET['p_id'];
+                        echo "<li><a href='admin/posts.php?source=edit_post&p_id={$p_id}'>Edit Post</a></li>";
+                    }
+                } else
+                    echo "";
+                ?>
+                <!-- <li>
                         <a href="#">Services</a>
                     </li>
                     <li>

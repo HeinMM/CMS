@@ -7,5 +7,7 @@
      $_SESSION['lastname'] = null;
      $_SESSION['user_role'] = null;
 
+     session_destroy();
+
      header("Location: ../index.php");
 ?>

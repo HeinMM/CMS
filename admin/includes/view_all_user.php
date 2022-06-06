@@ -56,7 +56,7 @@
 
 
 
-           
+
             echo "<td class='text-center'>$user_image</td>";
             echo "<td class='text-center'>$user_role</td>";
 
@@ -66,12 +66,12 @@
             echo "<td class='text-center'>  
             <a href='users.php?change_to_sub=$user_id' style='color: blue !important;'>Subscriber</a></td>";
 
-        
+
 
             echo "<td class='text-center'>  
             <a href='users.php?delete=$user_id' style='color: tomato !important;'>Delete</a></td>";
-           
-           
+
+
 
             echo "</tr>";
         }
@@ -111,14 +111,17 @@ if (isset($_GET['change_to_sub'])) {
 
 
 if (isset($_GET['delete'])) {
-    $the_user_id = $_GET['delete'];
+    if (isset($_SESSION['user_role'])) {
+        if ($_SESSION['user_role'] == 'admin') {
+            $the_user_id = escape($_GET['delete']);
 
-    $query = "DELETE FROM users WHERE user_id = {$the_user_id}";
-    $delete_user_query = mysqli_query($connection, $query);
-    if (!$delete_user_query) {
-        die('QUERY FAILED' . mysqli_error($connection));
+            $query = "DELETE FROM users WHERE user_id = {$the_user_id}";
+            $delete_user_query = mysqli_query($connection, $query);
+            if (!$delete_user_query) {
+                die('QUERY FAILED' . mysqli_error($connection));
+            }
+            header("Location: users.php");
+        }
     }
-    header("Location: users.php");
 }
 ?>
-

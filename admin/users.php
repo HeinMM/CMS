@@ -130,7 +130,7 @@
     <!-- /#page-wrapper -->
     <style>
         a {
-            color: white !important;
+            cursor: pointer;
         }
     </style>
 
